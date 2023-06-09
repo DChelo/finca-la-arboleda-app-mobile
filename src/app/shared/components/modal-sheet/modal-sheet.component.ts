@@ -6,6 +6,6 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 })
 export class ModalSheetComponent {
     @Input() isOpen!: boolean;
+    @Input() initialBreakpoint = 0.5;
     @Output() onWillDismiss = new EventEmitter<void>()
-
 }

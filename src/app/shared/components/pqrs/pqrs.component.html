@@ -1,0 +1,77 @@
+<app-modal-sheet
+  [initialBreakpoint]="0.75"
+  [isOpen]="isOpenModal"
+  (onWillDismiss)="onWillDismiss.emit()"
+>
+  <ion-content class="ion-padding" [fullscreen]="true">
+    <ion-text class="ion-text-center"><h5>Solicitud o Reclamos</h5></ion-text>
+    <form [formGroup]="form" (submit)="submit()">
+      <ion-list>
+        <ion-list>
+          <ion-text class="typography"
+            >De antemano nos disculparnos por los inconvenietes ocurridos,por
+            favor permitenos corregirlo, diligenciando el siguiente
+            formulario</ion-text
+          >
+          <br />
+          <br />
+          <ion-item>
+            <ion-label fill="outline"> Seleccione el motivo </ion-label>
+
+            <ion-select>
+              <ion-select-option value="1">uno</ion-select-option>
+
+              <ion-select-option value="2">dos</ion-select-option>
+
+              <ion-select-option value="3">tres</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <br />
+          <ion-item>
+            <ion-label> Seleccione el tipo </ion-label>
+
+            <ion-select>
+              <ion-select-option value="1">uno</ion-select-option>
+
+              <ion-select-option value="2">dos</ion-select-option>
+
+              <ion-select-option value="3">tres</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-list>
+
+      <div class="input-file">
+        <ion-button expand="full" fill="outline">
+          <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+          <ion-label slot="end">Selecciona evidencia</ion-label>
+          <input
+            formControlName="fileName"
+            type="file"
+            (change)="changeFile($event)"
+            id="file-input-hidden"
+            accept=".pdf"
+          />
+        </ion-button>
+        <ion-text> {{ form.get("fileName")?.value }}</ion-text>
+        <ion-text
+          color="danger"
+          *ngIf="
+            form.get('fileName')?.hasError('required') &&
+            (form.get('fileName')?.dirty || form.get('fileName')?.touched)
+          "
+        >
+          * Archivo es requerido !</ion-text
+        >
+      </div>
+
+      <div class="ion-padding footer">
+        <app-button
+          label="Enviar"
+          type="submit"
+          iconRight="arrow-forward-outline"
+        ></app-button>
+      </div>
+    </form>
+  </ion-content>
+</app-modal-sheet>

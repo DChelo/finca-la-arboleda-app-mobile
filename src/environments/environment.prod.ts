@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  API: "https://api-cabins-production.up.railway.app/api-cabins"
 };
