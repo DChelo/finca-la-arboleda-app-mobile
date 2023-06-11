@@ -10,8 +10,16 @@ app-rates {
   position: absolute;
 }
 
+app-button{
+  position: relative;
+  right: 35%;
+  left: 35%;
+  margin-bottom: 10px;
+}
+
+
 .rating-star {
-  font-size: 34px;
+  size: 50x;
 
   color: gold;
 
@@ -33,17 +41,5 @@ app-rates {
   font-family: "Open Sans", sans-serif;
 }
 
-ion-button.expand-block {
 
-
-  border-radius: 8px;
-  font-size: 16px;
-  padding: 5px 20px;
-  transition: background-color 0.3s;
-}
-
-ion-button.expand-block {
-  --ion-color-primary: #F43F5E;
-  --ion-color-primary-contrast: #FFFFFF;
-}
 

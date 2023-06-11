@@ -11,3 +11,8 @@ export interface Booking {
     final_date: string;
     url: string;
 }
+export interface RatingPayload {
+    bookings_id: number;
+    score: number;
+    description: string;
+  }

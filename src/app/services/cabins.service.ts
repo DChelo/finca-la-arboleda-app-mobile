@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Booking } from '../interface/ibooking';
+import { Booking, RatingPayload } from '../interface/ibooking';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,4 +15,8 @@ export class CabinsService {
   getBookingByCode(bookingCode: string) {
     return this.httpClient.get<Booking>(`${environment.API}/bookings/${bookingCode}`);
   }
+  submitRating(payload: RatingPayload) {
+    return this.httpClient.post<{success: true }>(`${environment.API}/bookings/califications`, payload);
+  }
+  
 }

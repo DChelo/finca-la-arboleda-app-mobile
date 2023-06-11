@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Pqrs } from '../interface/ipqrs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +9,11 @@ import { environment } from 'src/environments/environment';
 export class UploadFileService {
   constructor(private http: HttpClient) {}
 
-  sendFile(payload: FormData, idBooking: number) {
-    return this.http.post<{ success: boolean }>(
-      `${environment.API}/pqrs/${idBooking}`,
+  sendFile(payload: FormData) {
+    return this.http.post<Pqrs>(
+      `${environment.API}/pqrs`,
       payload
     );
   }
+  
 }

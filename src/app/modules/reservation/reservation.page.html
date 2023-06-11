@@ -33,9 +33,27 @@
     <app-button label="solicitar soporte" fill="outline" (onTap)="callSupport()"></app-button>
 
     <h1 class="h1-preguntas"><strong>Preguntas frecuentes</strong></h1>
-    <p>Dudas que pueden tener nuestros visitantes y que te van hacer util.</p>
 
-    <p class="p-preguntas">- ¿Puedo cancelar mi reserva?</p>
+    <p class="p-preguntas">
+      <ion-list>
+        <ion-item
+          *ngFor="let pregunta of preguntas"
+          (click)="mostrarRespuesta(pregunta)"
+        >
+          <br />
+          {{ pregunta.pregunta }}
+          <br />
+          <br />
+        </ion-item>
+      </ion-list>
+    
+      <ion-card *ngIf="respuestaVisible">
+        <ion-card-header>
+          <ion-title>{{ preguntaSeleccionada.pregunta }}</ion-title>
+        </ion-card-header>
+        <ion-card-content> {{ preguntaSeleccionada.respuesta }} </ion-card-content>
+      </ion-card>
+    </p>
   </div>
   <app-pqrs [isOpenModal]="isOpenModalPqrs" [booking]="booking" (onWillDismiss)="isOpenModalPqrs = false"></app-pqrs>
 </ion-content>

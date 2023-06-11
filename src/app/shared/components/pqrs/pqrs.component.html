@@ -17,29 +17,56 @@
           <br />
           <ion-item>
             <ion-label fill="outline"> Seleccione el motivo </ion-label>
-
-            <ion-select>
-              <ion-select-option value="1">uno</ion-select-option>
-
-              <ion-select-option value="2">dos</ion-select-option>
-
-              <ion-select-option value="3">tres</ion-select-option>
+            <ion-select formControlName="reason">
+              <ion-select-option value="Limpieza de cabaña"
+                >Limpieza de cabaña</ion-select-option
+              >
+              <ion-select-option value="Limpieza de piscina"
+                >Limpieza de piscina</ion-select-option
+              >
+              <ion-select-option value="Alimentación">Alimentación</ion-select-option>
+              <ion-select-option value="Ruido">Ruido</ion-select-option>
             </ion-select>
           </ion-item>
+          <ion-text
+          color="danger"
+          *ngIf="getError('reason', 'required')"
+        >
+          * Motivo es requerido !</ion-text>
+          
           <br />
           <ion-item>
-            <ion-label> Seleccione el tipo </ion-label>
-
-            <ion-select>
-              <ion-select-option value="1">uno</ion-select-option>
-
-              <ion-select-option value="2">dos</ion-select-option>
-
-              <ion-select-option value="3">tres</ion-select-option>
+            <ion-label>Seleccione el tipo</ion-label>
+            <ion-select formControlName="type">
+              <ion-select-option value="Pregunta">Pregunta</ion-select-option>
+              <ion-select-option value="Queja">Queja</ion-select-option>
+              <ion-select-option value="Sugerencia">Sugerencia</ion-select-option>
+              <ion-select-option value="Reclamo">Reclamo</ion-select-option>
             </ion-select>
           </ion-item>
+          <ion-text
+          color="danger"
+          *ngIf="getError('type', 'required')"
+        >
+          * Tipo es requerido !</ion-text>
         </ion-list>
       </ion-list>
+
+      <ion-item>
+        <ion-label position="floating">Comentario</ion-label>
+        <ion-textarea
+          formControlName="description"
+          rows="4"
+          maxlength="100"
+          placeholder="Escribe tu comentario aquí"
+        ></ion-textarea>
+        <ion-text
+          color="danger"
+          *ngIf="getError('description', 'required')"
+        >
+          Comentario es requerido</ion-text>
+      </ion-item>
+      
 
       <div class="input-file">
         <ion-button expand="full" fill="outline">
@@ -48,18 +75,16 @@
           <input
             formControlName="fileName"
             type="file"
-            (change)="changeFile($event)"
+            (change)="onFileSelected($event)"
             id="file-input-hidden"
             accept=".pdf"
           />
         </ion-button>
-        <ion-text> {{ form.get("fileName")?.value }}</ion-text>
+
+        <ion-text>{{ form.get("fileName")?.value }}</ion-text>
         <ion-text
           color="danger"
-          *ngIf="
-            form.get('fileName')?.hasError('required') &&
-            (form.get('fileName')?.dirty || form.get('fileName')?.touched)
-          "
+          *ngIf="getError('fileName', 'required')"
         >
           * Archivo es requerido !</ion-text
         >

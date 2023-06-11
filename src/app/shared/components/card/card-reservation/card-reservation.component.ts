@@ -1,5 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { Booking } from "src/app/interface/ibooking";
+import { environment }  from "src/environments/environment";
+import { HttpClient } from "@angular/common/http";
 
 
 @Component({
@@ -8,23 +10,46 @@ import { Booking } from "src/app/interface/ibooking";
   styleUrls: ['./card-reservation.component.scss'],
 })
 export class CardReservationComponent {
+  
 
-  selectedRating!: number;
+
   @Input() booking!: Booking;
   @Input() formattedInitialDate!: string | null;
   @Input() formattedFinalDate!: string | null;
-
-  submitRating() {
-    console.log('Calificación seleccionada:', this.selectedRating);
-    // Aquí puedes realizar más acciones con la calificación seleccionada, como enviarla al servidor, etc.
-  }
-
+ 
+  selectedRating!: number;
+  public opinion: string = '';
   public isOpenModal = false;
+  
+
+
+ constructor(private http: HttpClient) { }
+  submitRating() {
+     const payload = {
+      bookings_id: this.booking.booking_id,
+      score: this.selectedRating,
+      description: this.opinion
+  };
+
+  this.http.post(environment.API + '/bookings/califications', payload)
+  .subscribe((response: any) => {
+    // Manejar la respuesta de la API, si es necesario
+    console.log('Calificación enviada exitosamente', response);
+    // Restablecer los valores
+
+    this.selectedRating = 0;
+    this.opinion = '';
+    this.isOpenModal = false;
+  } ,(error: any) => {
+    // Manejar cualquier error de la API, si es necesario
+    console.error('Error al enviar la calificación', error);
+  });
+}
 
   public onTapRate(rating: { rate: number }) {
     console.log('rate', rating);
     this.selectedRating = rating.rate;
-    this.isOpenModal = true;
+    this.isOpenModal=true;
   }
 
   loadImg(imgUrl : string){
