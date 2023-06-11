@@ -5,6 +5,7 @@ import { Booking } from '../../interface/ibooking';
 import { NavParams } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reservation',
@@ -23,7 +24,8 @@ export class ReservationPage implements OnInit {
     private service: CabinsService,
     private navParams: NavParams,
     private route: ActivatedRoute,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private toastController: ToastController
   ) {
     this.reservationCode = this.navParams.get('code');
   }
@@ -39,12 +41,12 @@ export class ReservationPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  goToPqrs(){
+  goToPqrs() {
     console.log('on tap callSupport');
     this.isOpenModalPqrs = true;
   }
 
-  callSupport(){
+  callSupport() {
     console.log('on tap callSupport');
     this.isOpenModalPqrs = true;
   }
@@ -66,10 +68,20 @@ export class ReservationPage implements OnInit {
         )!;
       },
       error: (err) => {
-        console.log(err);
+        console.log("Codigo no existe");
+        this.presentToast('El código de reserva no existe');
         this.router.navigate(['/home']);
       },
     });
   }
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+    });
+    toast.present();
+  }
 }
+
 

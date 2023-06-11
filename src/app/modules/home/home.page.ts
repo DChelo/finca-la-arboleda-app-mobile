@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,18 +8,30 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
   reservationCode: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private toastController: ToastController
+  ) {
 
-  navigateToReservation() {
-    this.router.navigate(['/reservation'], {
-      queryParams: { code: this.reservationCode }
-    });
   }
-  
+
+  async navigateToReservation() {
+    if (this.reservationCode && this.reservationCode.trim() !== '') {
+      this.router.navigate(['/reservation'], {
+        queryParams: { code: this.reservationCode },
+      });
+    } else {
+      const toast = await this.toastController.create({
+        message: 'Por favor, ingrese un código de reserva',
+        duration: 3000,
+        position: 'bottom',
+      });
+      toast.present();
+    }
+  }
 }
-  
-  
+
+
 
