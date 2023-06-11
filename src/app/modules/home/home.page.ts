@@ -12,10 +12,6 @@ export class HomePage {
 
   constructor(private router: Router) {}
 
-  // goToReservation(){
-  //   this.router.navigate(['/reservation'])
-  // }
-
   navigateToReservation() {
     this.router.navigate(['/reservation'], {
       queryParams: { code: this.reservationCode }

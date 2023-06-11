@@ -24,7 +24,7 @@
 
     <!-- Card que contiene el nombre, fecha e imagen de la reserva -->
     <app-card-reservation
-      [booking]="booking" 
+      [booking]="booking"
       [formattedInitialDate]="formattedInitialDate"
       [formattedFinalDate]="formattedFinalDate">
     </app-card-reservation>
@@ -37,4 +37,5 @@
 
     <p class="p-preguntas">- ¿Puedo cancelar mi reserva?</p>
   </div>
+  <app-pqrs [isOpenModal]="isOpenModalPqrs" [booking]="booking" (onWillDismiss)="isOpenModalPqrs = false"></app-pqrs>
 </ion-content>
