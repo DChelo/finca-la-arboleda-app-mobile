@@ -6,9 +6,31 @@
     <ion-card-title>{{booking.tittle}}</ion-card-title>
   </ion-card-header>
   <img alt="" [src]="loadImg(booking.url)" />
-  <app-rates [rating]="3" (onTapRate)="onTapRate($event)"></app-rates>
+  <app-rates [rating]="selectedRating" (onTapRate)="onTapRate($event)"></app-rates>
 </ion-card>
 
 <app-modal-sheet [isOpen]="isOpenModal" (onWillDismiss)="isOpenModal=false">
-  <h1>mi contenido</h1>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="title-center">CALIFICA TU EXPERIENCIA</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item class="ion-align-items-center">
+
+        <ion-icon *ngFor="let i of [1, 2, 3, 4, 5]" [name]="i <= selectedRating ? 'star' : 'star-outline'"
+          class="rating-star"></ion-icon>
+
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Opinión:</ion-label>
+        <ion-textarea rows=""></ion-textarea>
+      </ion-item>
+    </ion-card-content>
+
+    <ion-row justify-content-center>
+      <ion-button expand="block" class="expand-block" (click)="submitRating()">Enviar</ion-button>
+    </ion-row>
+  </ion-card>
 </app-modal-sheet>
