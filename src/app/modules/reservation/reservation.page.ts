@@ -18,6 +18,7 @@ export class ReservationPage implements OnInit {
   public formattedInitialDate!: string;
   public formattedFinalDate!: string;
   isOpenModalPqrs = false;
+  respuestasVisibles: boolean[] = [];
 
   constructor(
     private router: Router,
@@ -29,6 +30,15 @@ export class ReservationPage implements OnInit {
   ) {
     this.reservationCode = this.navParams.get('code');
   }
+
+  preguntas: any[] = [
+    { mostrarRespuesta: false }, // Pregunta 0
+    { mostrarRespuesta: false }, // Pregunta 1
+    { mostrarRespuesta: false }, // Pregunta 2
+    { mostrarRespuesta: false }, // Pregunta 3
+    { mostrarRespuesta: false }, // Pregunta 4
+    // Agrega más objetos si tienes más preguntas
+  ];
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -42,7 +52,7 @@ export class ReservationPage implements OnInit {
   }
 
   goToPqrs() {
-    console.log('on tap callSupport');
+    console.log('on tap goToPqrs');
     this.isOpenModalPqrs = true;
   }
 
@@ -74,6 +84,7 @@ export class ReservationPage implements OnInit {
       },
     });
   }
+
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
@@ -82,40 +93,8 @@ export class ReservationPage implements OnInit {
     });
     toast.present();
   }
-  
-  preguntas: any[] = [
 
-    {
-      pregunta: '¿Cuáles son las instalaciones y servicios que se ofrecen en la cabaña?',
-      respuesta: 'La cabaña cuenta con todas las instalaciones interiores de esta y exteriores cuenta con piscina , cancha, zonas verdes y zonas comunes , tambien cuenta con la zona de juegos y zona de asados.',
-    },
-    {
-      pregunta: '¿Hay restricciones en cuanto al número de personas que pueden alojarse en la cabaña?',
-      respuesta: 'El limite de personas varia segun el hospedaje que selecciones en la pestaña donde realices tu reserva',
-    },
-    {
-      pregunta: '¿Hay algún costo adicional por el uso de las instalaciones o servicios adicionales?',
-      respuesta: 'Sobre los costos ya se manejan segun el plan que seleccionaste en tu reserva.',
-    },
-    {
-      pregunta: '¿Cuál es el diseño de la cabaña y cuántos dormitorios tiene?',
-      respuesta: 'El diseño que maneja la cabaña es moderna asimilando la forma de un pequeño aparta estudio con 2 dormitorios ',
-    },
-    {
-      pregunta: '¿Puedo llevar a mis mascotas conmigo a la cabaña?',
-      respuesta: 'Si, siempre y cuando seas cauteloso y te hagas completamente responsable de ella.',
-    },
-  ];
-
-  respuestaVisible = false;
-  preguntaSeleccionada: any;
-
-  mostrarRespuesta(pregunta: any) {
-    this.respuestaVisible = true;
-    this.preguntaSeleccionada = pregunta;
+  mostrarRespuesta(id: number) {
+    this.respuestasVisibles[id] = !this.respuestasVisibles[id];
   }
 }
-
-
-
-

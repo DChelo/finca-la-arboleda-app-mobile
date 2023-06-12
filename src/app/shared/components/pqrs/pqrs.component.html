@@ -18,37 +18,41 @@
           <ion-item>
             <ion-label fill="outline"> Seleccione el motivo </ion-label>
             <ion-select formControlName="reason">
-              <ion-select-option value="Limpieza de cabaña"
+              <ion-select-option placeholder="Limpieza de cabaña"
                 >Limpieza de cabaña</ion-select-option
               >
-              <ion-select-option value="Limpieza de piscina"
+              <ion-select-option placeholder="Limpieza de piscina"
                 >Limpieza de piscina</ion-select-option
               >
-              <ion-select-option value="Alimentación">Alimentación</ion-select-option>
-              <ion-select-option value="Ruido">Ruido</ion-select-option>
+              <ion-select-option placeholder="Alimentación"
+                >Alimentación</ion-select-option
+              >
+              <ion-select-option placeholder="Ruido">Ruido</ion-select-option>
             </ion-select>
           </ion-item>
-          <ion-text
-          color="danger"
-          *ngIf="getError('reason', 'required')"
-        >
-          * Motivo es requerido !</ion-text>
-          
+          <ion-text color="danger" *ngIf="getError('reason', 'required')">
+            * Motivo es requerido !</ion-text
+          >
+
           <br />
           <ion-item>
             <ion-label>Seleccione el tipo</ion-label>
             <ion-select formControlName="type">
-              <ion-select-option value="Pregunta">Pregunta</ion-select-option>
-              <ion-select-option value="Queja">Queja</ion-select-option>
-              <ion-select-option value="Sugerencia">Sugerencia</ion-select-option>
-              <ion-select-option value="Reclamo">Reclamo</ion-select-option>
+              <ion-select-option placeholder="Pregunta"
+                >Pregunta</ion-select-option
+              >
+              <ion-select-option placeholder="Queja">Queja</ion-select-option>
+              <ion-select-option placeholder="Sugerencia"
+                >Sugerencia</ion-select-option
+              >
+              <ion-select-option placeholder="Reclamo"
+                >Reclamo</ion-select-option
+              >
             </ion-select>
           </ion-item>
-          <ion-text
-          color="danger"
-          *ngIf="getError('type', 'required')"
-        >
-          * Tipo es requerido !</ion-text>
+          <ion-text color="danger" *ngIf="getError('type', 'required')">
+            * Tipo es requerido !</ion-text
+          >
         </ion-list>
       </ion-list>
 
@@ -60,13 +64,10 @@
           maxlength="100"
           placeholder="Escribe tu comentario aquí"
         ></ion-textarea>
-        <ion-text
-          color="danger"
-          *ngIf="getError('description', 'required')"
+        <ion-text color="danger" *ngIf="getError('description', 'required')">
+          Comentario es requerido</ion-text
         >
-          Comentario es requerido</ion-text>
       </ion-item>
-      
 
       <div class="input-file">
         <ion-button expand="full" fill="outline">
@@ -82,10 +83,7 @@
         </ion-button>
 
         <ion-text>{{ form.get("fileName")?.value }}</ion-text>
-        <ion-text
-          color="danger"
-          *ngIf="getError('fileName', 'required')"
-        >
+        <ion-text color="danger" *ngIf="getError('fileName', 'required')">
           * Archivo es requerido !</ion-text
         >
       </div>
